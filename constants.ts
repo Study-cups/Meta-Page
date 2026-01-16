@@ -41,7 +41,7 @@ export const COLLEGES: College[] = [
   {
     id: '5',
     name: 'Brookstone Institute of Global Studies (BIGS)',
-    location: 'Germany',
+    location: 'Dubai',
     logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQun_T4LSzT9irYdrIwwZaqwOt6RXvSb-wcHw&s',
     recruiters: ['Reliance', 'Shell', 'GAIL'],
     highestPackage: '₹17 LPA',
