@@ -77,12 +77,12 @@ export const COLLEGES: College[] = [
 ];
 
 export const TESTIMONIALS: Testimonial[] = [
-  { id: '1', name: 'Sneha Nair', company: 'J.P. Morgan', image: './Untitled design (14).png' },
-  { id: '2', name: 'Rohan Gupta', company: 'ICICI Bank', image: './Untitled design (13).png' },
-  { id: '3', name: 'Karan Singh', company: 'Amazon', image: './Untitled design (12).png' },
-  { id: '4', name: 'Aditya Malhotra', company: 'Cognizant', image: './Untitled design (11).png' },
-  { id: '5', name: 'Priya Sharma', company: 'Google', image: './Untitled design (15).png' },
-  { id: '6', name: 'Vikram Mehta', company: 'Deloitte', image: './image 10.png' },
+  { id: '1', name: 'Sneha Nair', company: 'J.P. Morgan', image: '../images/Untitled design (14).png' },
+  { id: '2', name: 'Rohan Gupta', company: 'ICICI Bank', image: '../images/Untitled design (13).png' },
+  { id: '3', name: 'Karan Singh', company: 'Amazon', image: '../images/Untitled design (12).png' },
+  { id: '4', name: 'Aditya Malhotra', company: 'Cognizant', image: '../images/Untitled design (11).png' },
+  { id: '5', name: 'Priya Sharma', company: 'Google', image: '../images/Untitled design (15).png' },
+  { id: '6', name: 'Vikram Mehta', company: 'Deloitte', image: '../images/image 10.png' },
  
 ];
 
