@@ -9,7 +9,11 @@ interface SuccessCarouselProps {
 const SuccessCarousel: React.FC<SuccessCarouselProps> = ({ testimonials }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const timeoutRef = useRef<number | null>(null);
+  const timeoutRef = useRef<number | null>(null); 
+
+  const DESKTOP_SLIDES = 4;
+const maxDesktopIndex = testimonials.length - DESKTOP_SLIDES; // 6 - 4 = 2
+
 
   const resetTimeout = () => {
     if (timeoutRef.current) {
@@ -17,16 +21,26 @@ const SuccessCarousel: React.FC<SuccessCarouselProps> = ({ testimonials }) => {
     }
   };
 
-  useEffect(() => {
-    if (!isPaused) {
-      resetTimeout();
-      timeoutRef.current = window.setTimeout(
-        () => setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length),
-        5000
-      );
-    }
-    return () => resetTimeout();
-  }, [currentIndex, isPaused, testimonials.length]);
+useEffect(() => {
+  if (isPaused) return;
+
+  resetTimeout();
+
+  timeoutRef.current = window.setTimeout(() => {
+    setCurrentIndex(prev => {
+      // ✅ DESKTOP ONLY LOGIC
+      if (window.innerWidth >= 1024) {
+        return prev >= maxDesktopIndex ? 0 : prev + 1;
+      }
+
+      // ✅ Mobile / Tablet (unchanged behavior)
+      return (prev + 1) % testimonials.length;
+    });
+  }, 5000);
+
+  return () => resetTimeout();
+}, [currentIndex, isPaused, testimonials.length]);
+
 
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
@@ -34,8 +48,21 @@ const SuccessCarousel: React.FC<SuccessCarouselProps> = ({ testimonials }) => {
     setTimeout(() => setIsPaused(false), 10000); // Resume auto-play after 10s of inactivity
   };
 
-  const nextSlide = () => goToSlide((currentIndex + 1) % testimonials.length);
-  const prevSlide = () => goToSlide((currentIndex - 1 + testimonials.length) % testimonials.length);
+ const nextSlide = () => {
+  if (window.innerWidth >= 1024) {
+    goToSlide(currentIndex >= maxDesktopIndex ? 0 : currentIndex + 1);
+  } else {
+    goToSlide((currentIndex + 1) % testimonials.length);
+  }
+};
+
+const prevSlide = () => {
+  if (window.innerWidth >= 1024) {
+    goToSlide(currentIndex <= 0 ? maxDesktopIndex : currentIndex - 1);
+  } else {
+    goToSlide((currentIndex - 1 + testimonials.length) % testimonials.length);
+  }
+};
 
   return (
     <div className="relative group">
